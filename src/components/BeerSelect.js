@@ -12,7 +12,7 @@ class BeerSelect extends Component{
   }
 
   handleSelectedBeerChange(evt) {
-    this.setState({selecteBeerdIndex: evt.target.value});
+    this.setState({selectedBeerIndex: evt.target.value});
     this.props.handleSelectedBeer(evt.target.value);
   }
 

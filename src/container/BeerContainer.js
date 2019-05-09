@@ -5,6 +5,8 @@ import '../components/BeerSelect.css';
 import DisplayBeer from '../components/DisplayBeer.js'
 import DropdownFoodSelect from '../components/DropdownFoodSelect.js'
 import DisplayFood from '../components/DisplayFood.js'
+import SearchField from "react-search-field";
+
 
 class  BeerContainer extends Component {
 
@@ -12,12 +14,13 @@ class  BeerContainer extends Component {
     super(props)
       this.state = {
         beerData: [],
-        selectedBeerIndex: null,
-        selectedFoodIndex: null
+        selectedBeer: null,
+        selectedFood: null
       }
     this.handleSelectedBeer = this.handleSelectedBeer.bind(this)
     this.createBeerCard = this.createBeerCard.bind(this)
     this.handleSelectedFood = this.handleSelectedFood.bind(this)
+    this.onSearchChange = this.onSearchChange.bind(this)
   }
 
   componentDidMount(){
@@ -29,22 +32,41 @@ class  BeerContainer extends Component {
   }
 
   handleSelectedBeer(index) {
-    this.setState({selectedBeerIndex: index});
+    this.setState({selectedBeer: this.state.beerData[index]});
   }
 
   handleSelectedFood(index) {
-    this.setState({selectedFoodIndex: index});
+    this.setState({selectedFood: this.state.beerData[index]});
   }
 
   createBeerCard(){
-    if (this.state.selectedBeerIndex) {
-      return <DisplayBeer beer={this.state.beerData[this.state.selectedBeerIndex]} />
+    if (this.state.selectedBeer) {
+      return <DisplayBeer beer={this.state.selectedBeer} />
     }
   }
 
   createFoodCard(){
-    if (this.state.selectedFoodIndex) {
-      return <DisplayFood beer={this.state.beerData[this.state.selectedFoodIndex]} />
+    if (this.state.selectedFood) {
+      return <DisplayFood beer={this.state.selectedFood} />
+    }
+  }
+
+  onSearchChange(text) {
+    // var index;
+    // for (index = 0; index < this.state.beerData.length; index++) {
+    //   if (this.state.beerData[index].name.includes(text)) {
+    //     this.setState({selectedBeerIndex: index});
+    //     return;
+    //   }
+    // }
+    // this.setState({selectedBeerIndex: null});
+
+    if (text) {
+      fetch('https://api.punkapi.com/v2/beers?beer_name=' + text)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({beerData: data})
+        })
     }
   }
 
@@ -59,6 +81,11 @@ class  BeerContainer extends Component {
           <DropdownFoodSelect
             beerData={this.state.beerData}
             handleSelectedFood={this.handleSelectedFood}
+          />
+          <SearchField
+            placeholder="Search..."
+            onChange={this.onSearchChange}
+            classNames="test-class"
           />
           {this.createBeerCard()}
           {this.createFoodCard()}

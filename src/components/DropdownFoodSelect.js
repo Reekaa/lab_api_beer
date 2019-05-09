@@ -12,7 +12,7 @@ class DropdownFoodSelect extends Component{
   }
 
   handleSelectedFoodChange(evt) {
-    this.setState({selecteFoodIndex: evt.target.value});
+    this.setState({selectedFoodIndex: evt.target.value});
     this.props.handleSelectedFood(evt.target.value);
   }
 
