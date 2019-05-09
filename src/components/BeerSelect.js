@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './BeerSelect.css';
 
 class BeerSelect extends Component{
 
@@ -7,6 +8,7 @@ class BeerSelect extends Component{
     this.state = {
       selectedBeerIndex: 0
     }
+    this.handleSelectedBeerChange = this.handleSelectedBeerChange.bind(this)
   }
 
   handleSelectedBeerChange(evt) {
@@ -16,7 +18,7 @@ class BeerSelect extends Component{
 
   createDropdown() {
     return this.props.beerData.map((beer, index) => {
-      return <option className="dropdown"value={index} key={index}>{beer.name}</option>
+      return <option className="ui dropdown" value={index} key={index}>{beer.name}</option>
     });
   }
 
