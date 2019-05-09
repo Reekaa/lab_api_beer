@@ -4,7 +4,7 @@ import Header from '../components/Header.js';
 import '../components/BeerSelect.css';
 import DisplayBeer from '../components/DisplayBeer.js'
 import DropdownFoodSelect from '../components/DropdownFoodSelect.js'
-/*import DisplayFood from '../components/DisplayFood.js'*/
+import DisplayFood from '../components/DisplayFood.js'
 
 class  BeerContainer extends Component {
 
@@ -12,11 +12,12 @@ class  BeerContainer extends Component {
     super(props)
       this.state = {
         beerData: [],
-        selectedBeerIndex: null
+        selectedBeerIndex: null,
+        selectedFoodIndex: null
       }
     this.handleSelectedBeer = this.handleSelectedBeer.bind(this)
     this.createBeerCard = this.createBeerCard.bind(this)
-    /*this.handleSelectedFood = this.handleSelectedFood.bind(this)*/
+    this.handleSelectedFood = this.handleSelectedFood.bind(this)
   }
 
   componentDidMount(){
@@ -32,7 +33,7 @@ class  BeerContainer extends Component {
   }
 
   handleSelectedFood(index) {
-    this.setState({selectedBeerIndex: index});
+    this.setState({selectedFoodIndex: index});
   }
 
   createBeerCard(){
@@ -41,11 +42,11 @@ class  BeerContainer extends Component {
     }
   }
 
-  /*createFoodCard(){
-    if (this.state.selectedBeerIndex) {
-      return <DropdownFoodSelect beer={this.state.beerData[this.state.selectedBeerIndex]} />
+  createFoodCard(){
+    if (this.state.selectedFoodIndex) {
+      return <DisplayFood beer={this.state.beerData[this.state.selectedFoodIndex]} />
     }
-  }*/
+  }
 
   render() {
       return (
@@ -57,9 +58,10 @@ class  BeerContainer extends Component {
           />
           <DropdownFoodSelect
             beerData={this.state.beerData}
-            handleSelectedBeer={this.handleSelectedBeer}
+            handleSelectedFood={this.handleSelectedFood}
           />
           {this.createBeerCard()}
+          {this.createFoodCard()}
         </>
       )
     }

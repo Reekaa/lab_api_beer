@@ -6,13 +6,13 @@ class DropdownFoodSelect extends Component{
   constructor(props){
     super(props)
     this.state = {
-      selectedBeerIndex: 0
+      selectedFoodIndex: 0
     }
     this.handleSelectedFoodChange = this.handleSelectedFoodChange.bind(this)
   }
 
   handleSelectedFoodChange(evt) {
-    this.setState({selecteBeerdIndex: evt.target.value});
+    this.setState({selecteFoodIndex: evt.target.value});
     this.props.handleSelectedFood(evt.target.value);
   }
 
@@ -24,7 +24,7 @@ class DropdownFoodSelect extends Component{
 
   render() {
     return (
-      <select value={this.state.selectedBeerIndex} onChange={this.handleSelectedFoodChange}>
+      <select value={this.state.selectedFoodIndex} onChange={this.handleSelectedFoodChange}>
         {this.createFoodDropdown()}
       </select>
     )
