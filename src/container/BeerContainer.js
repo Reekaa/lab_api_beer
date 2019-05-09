@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import BeerSelect from '../components/BeerSelect.js';
 
-class  BeerContainer {
+class  BeerContainer extends Component {
 
   constructor(props){
     super(props)
@@ -29,6 +30,7 @@ class  BeerContainer {
   render() {
       return (
         <>
+          <h1>BrewDog Beers</h1>
           <BeerSelect
             beerData={this.state.beerData}
             handleSelectedBeer={this.handleSelectedBeer}
